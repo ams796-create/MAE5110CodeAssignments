@@ -11,7 +11,7 @@ def dynamics(t, state, params):
     angular_velocity = state[1]
 
     angular_acceleration = (
-        mass * gravity * length * np.sin(angle)
+        -1 * mass * gravity * length * np.sin(angle)
         - damping_coeff * angular_velocity  # <-- DAMPING TERM
     ) / (mass * length**2)
 
@@ -23,8 +23,8 @@ def generate_params():
     params = {
         "gravity": 9.81,  # gravity m/s^2)
         "length": 1,  # rod length (m)
-        "mass": 1,  # point mass at end of rod (kg)
-        "damping_coeff": 0.1,  # damping coefficient (kg*m^2/s)
+        "mass": .2,  # point mass at end of rod (kg)
+        "damping_coeff": 0.0,  # damping coefficient (kg*m^2/s)
     }
     return params
 
@@ -39,5 +39,5 @@ def calculate_energy(state, params):
     angular_velocity = state[1]
 
     kinetic_energy = 0.5 * mass * (length * angular_velocity) ** 2
-    potential_energy = mass * gravity * length * np.cos(angle)
+    potential_energy = mass * gravity * length * (1-np.cos(angle))
     return kinetic_energy, potential_energy
