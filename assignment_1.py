@@ -62,5 +62,5 @@ plt.axvline(gamma + alpha, color="tab:green", linestyle="--", label=r"$\gamma + 
 plt.axvline(gamma, color="gray", linestyle=":", label=r"$\gamma$")
 plt.axhline(0, color="black", linewidth=0.5)
 plt.legend()
-plt.savefig("phase_portrait.png")
-print("Phase Portrait complete, Please check folder for updated phase_portrait.png")
+plt.savefig("rimless_wheel_phase_portrait.png")
+print("Phase Portrait complete, Please check folder for updated rimless_wheel_phase_portrait.png")
