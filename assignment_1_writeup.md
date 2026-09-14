@@ -153,6 +153,8 @@ To ease in the calculation, the Floquet multiplier is determined by derivation l
 λ = cos²(2α)
 
 This is only dependent on α, which is half the angle between the spokes. Thus, the Floquet multiplier is only dependent on the # of spokes N, not the inclination.
+
+Edit: In response to my peer review (thank you!), I realize that the instructions were likely implying this should be done **numerically** rather than **theoretically**. One could test a slightly higher and lower initial angular velocity around the fixed point and take the slope of the points determine the multiplier. I misunderstood this the first time. In the interest of time I will keep my theoretical derivation but I understand this is different from the instructions.
  
 <img src="floquet_vs_N.png" alt="Floquet vs N" width="450">
 
