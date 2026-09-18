@@ -272,7 +272,7 @@ plt.title("Floquet Multiplier vs Incline angle")
 plt.ylim(0, 1)
 plt.tight_layout()
 plt.savefig("floquet_vs_gamma.png")
-print("Floquet vs Gamme complete, Please check folder for floquet_vs_gamma.png")
+print("Floquet vs Gamma complete, Please check folder for floquet_vs_gamma.png")
 
 
 
