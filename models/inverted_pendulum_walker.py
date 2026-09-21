@@ -13,16 +13,42 @@ def generate_params():
 
 
 def dynamics(t, state, params):
-    # TODO: implement the state derivative.
-    return np.array([0.0, 0.0])
+    gravity = params["gravity"]
+    length = params["length"]
+    mass = params["mass"]
+    torque = params["ankle_torque"]
+
+    angle = state[0]
+    angular_velocity = state[1]
+    angular_acceleration = (mass*gravity*length*np.sin(angle) + torque) / (mass*length**2)
+
+    state_derivative = np.array([angular_velocity, angular_acceleration])
+    return state_derivative
 
 
 def event_guard(previous_state, next_state, params):
-    pass
+    incline = params["incline"]
+    angle_of_attack = params["angle_of_attack"]
+
+    theta_before = previous_state[0]
+    theta_after = next_state[0]
+
+    touchdown_angle = incline + angle_of_attack
+    crossed_touchdown = theta_before < touchdown_angle and theta_after >= touchdown_angle # swing leg touches down, end of stance phase
+
+    return crossed_touchdown
 
 
 def event_dynamics(state, params):
-    pass
+    angle_of_attack = params["angle_of_attack"]
+
+    theta = state[0]
+    theta_dot = state[1]
+
+    theta = theta - 2*angle_of_attack
+    theta_dot = theta_dot*np.cos(2*angle_of_attack)
+
+    return np.array([theta, theta_dot])
 
 
 def calculate_energy(state, params):
