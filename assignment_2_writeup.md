@@ -12,8 +12,6 @@ The writeup is called `assignment_2_writeup.md`.
 
 ![Model sketches of the inverted pendulum walker](model_sketches.jpg){width=60%}
 
-Need to add: the state space plots of the inverted pendulum, for each snapshot and identify where the system is, + sketch out the corresponding event guards as $\alpha$ changes.
-
 ## 2. Visualization of ROA
 
 ![Controller Region of Attraction](output/assignment_2/roa.png){width=60%}
@@ -42,20 +40,21 @@ Note: this applies only during normal stepping. It will not be transverse if the
 
 ## 4. Verification of grid resolution,
 
-To determine the minimum grid resolution needed, I wanted to determine the lowest resolution at which the number of steps is accurate. I ran simulations for a variety of resolutions (grid sizes) and initial angular velocities ($\dot\theta$) to see what the results converged to.
+To determine the minimum grid resolution needed, I wanted to determine the lowest resolution at which the number of steps is accurate. I ran simulations for a variety of resolutions (grid sizes) and initial angular velocities ($\dot\theta$) to see what the results converged to. I took the resolution to be the first grid resolution where the results converged.
 
 
-| Resolution | $\dot\theta$ = 1.0 | $\dot\theta$ = 2.0 | $\dot\theta$ = 3.0 | $\dot\theta$ = 4.0 |
-|---|---|---|---|---|
-| 19x19 | 1.0 | 2.0 | 3.0 | 4.0 |
-| 20x20 | 1.0 | 2.0 | 3.0 | 3.0 |
-| 21x21 | 1.0 | 2.0 | 3.0 | 4.0 |
-| 22x22 | 1.0 | 2.0 | 3.0 | 4.0 |
-| 23x23 | 1.0 | 2.0 | 3.0 | 4.0 |
-| 24x24 | 1.0 | 2.0 | 3.0 | 4.0 |
-| 25x25 | 1.0 | 2.0 | 3.0 | 4.0 |
+| Resolution | $\dot\theta$ = 0.5 | $\dot\theta$ = 1.0 | $\dot\theta$ = 1.5 | $\dot\theta$ = 2.0 | $\dot\theta$ = 2.5 | $\dot\theta$ = 3.0 | $\dot\theta$ = 3.5 | $\dot\theta$ = 4.0 |
+|---|---|---|---|---|---|---|---|---|
+| 16x16 | 1.0 | 2.0 | 2.0 | 3.0 | 3.0 | 4.0 | 4.0 | 4.0 |
+| 17x17 | 1.0 | 1.0 | 2.0 | 2.0 | 3.0 | 3.0 | 3.0 | 3.0 |
+| 18x18 | 1.0 | 2.0 | 2.0 | 3.0 | 3.0 | 3.0 | 4.0 | 4.0 |
+| 19x19 | 1.0 | 1.0 | 2.0 | 2.0 | 3.0 | 3.0 | 3.0 | 4.0 |
+| 20x20 | 1.0 | 1.0 | 2.0 | 2.0 | 3.0 | 3.0 | 3.0 | 3.0 |
+| 21x21 | 1.0 | 1.0 | 2.0 | 2.0 | 3.0 | 3.0 | 3.0 | 4.0 |
+| 22x22 | 1.0 | 1.0 | 2.0 | 2.0 | 3.0 | 3.0 | 3.0 | 4.0 |
 
-Seen above, the # of steps appears to converge at 21 x 21. The prior resolutions appear to be at/around the boundary leading to varying calculations of the number of steps. Thus, 21 x 21 was chosen as the resolution.
+
+Seen above, small changes in grid size  # of steps appears to converge at 21 x 21. The prior resolution (20x20) appear to be at/around the boundary leading to varying calculations of the number of steps. Thus, 21 x 21 was chosen as the resolution. 
 
 
 ## 5. Sample Trajectory: 3 steps and max steps

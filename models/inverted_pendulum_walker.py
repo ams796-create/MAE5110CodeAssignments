@@ -9,6 +9,7 @@ import numpy as np
 
 
 def generate_params():
+    # did not use
     pass
 
 
@@ -52,6 +53,7 @@ def event_dynamics(state, params):
 
 
 def calculate_energy(state, params):
+    # did not use
     pass
 
 

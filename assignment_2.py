@@ -38,6 +38,7 @@ def compute_ankle_torque(state, params):
 
 
 def simulate_ankle_controller(initial_state, params, timestep, sim_time, theta_tolerance, theta_dot_tolerance, theta_giveup):
+    params = dict(params)
     n_timesteps = round(sim_time / timestep) + 1
     time_traj = np.arange(n_timesteps) * timestep
     state_traj = np.zeros((2, n_timesteps))
@@ -96,7 +97,7 @@ def plot_controller_roa(theta_range, theta_dot_range, grid):
     cbar.set_ticks([0, 1])
     plt.xlabel("Angle θ (rad)")
     plt.ylabel("Angular Velocity θ̇ (rad/s)")
-    plt.title("Ankle Controller Region of Attraction")
+    plt.title("Controller Region of Attraction")
     plt.tight_layout()
 
 
@@ -115,6 +116,7 @@ def reached_roa(state, theta_range, theta_dot_range, roa_grid):
 # 3. Main Walking Loop Functions:
 
 def simulate_walker(initial_state, params, timestep, sim_time, theta_range, theta_dot_range, roa_grid):
+    params = dict(params)
     n_timesteps = round(sim_time / timestep) + 1
     time_traj = np.arange(n_timesteps) * timestep
     state_traj = np.zeros((2, n_timesteps))
@@ -172,7 +174,7 @@ def simulate_footstep(theta_dot_initial, alpha, params, timestep, max_sim_time=5
             return state_traj[:, : step + 2], time_traj[: step + 2]
         
         elif touched_down and next_state[0] < 0 and next_state[1] <= 0:
-            return None  # it turned around after impact, fell back, never reaches theta=0
+            return None  # Check for if it fell back, never reaches theta=0
 
         state_traj[:, step + 1] = next_state
 
@@ -362,8 +364,8 @@ print("ROA complete, please check output folder for roa.png")
 
 # B. Check grid resolution: 
 # test whether the needed # of steps changes as the resolution changes and checking at several different initial speeds
-benchmark_theta_dots = [1.0, 2.0, 3.0, 4.0]
-resolutions_to_test = [18, 19, 20, 21, 22, 23, 24]
+benchmark_theta_dots = [0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0]
+resolutions_to_test = [16, 17, 18, 19, 20, 21, 22]
 
 steps_at_each_resolution = np.zeros((len(resolutions_to_test), len(benchmark_theta_dots))) # rows=resolutions, columns=benchmark speeds
 
@@ -376,7 +378,7 @@ for i, n in enumerate(resolutions_to_test):
     for j, benchmark_theta_dot in enumerate(benchmark_theta_dots):
         nearest_index = find_nearest_index(benchmark_theta_dot, resolution_theta_dot_sweep)
         steps_at_each_resolution[i, j] = resolution_steps_to_standstill[nearest_index]
-        
+
 # print table used in deliverable
 print("\nSteps to Standstill Needed, by Grid Resolution")
 header = "resolution".ljust(12)
@@ -430,7 +432,7 @@ plt.ylabel("Steps to Standstill")
 plt.title("Steps to Standstill vs. Initial Angular Velocity")
 with open("output/assignment_2/steps_to_standstill.png", "wb") as f:
     plt.savefig(f)
-print("Steps to Standstill for various, please check output folder for lookup_table.png")
+print("Steps to Standstill for various, please check output folder for steps_to_standstill.png")
 
 
 # E. Plot the trajectory for a walker needing at least 3 steps and the max
