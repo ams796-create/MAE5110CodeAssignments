@@ -24,9 +24,9 @@ $$
 \theta = 0,\qquad \dot{\theta} > 0
 $$
 
-Each walking step begins with the walker at a negative angle and ends at a positive angle, so the walker crosses \(\theta=0\) during each successful forward step. Since \(\theta\) is fixed at the Poincaré section, angular velocity is the only state needed for the discrete return map.
+Each walking step begins with the walker at a negative angle and ends at a positive angle, so the walker crosses $\theta=0$ during each successful forward step. Since $\theta$ is fixed at the Poincaré section, angular velocity is the only state needed for the discrete return map.
 
-The section is also transverse to the flow during forward walking because \(\dot{\theta}>0\) at the crossing.
+The section is also transverse to the flow during forward walking because $\dot{\theta}>0$ at the crossing.
 
 
 ## 4. Grid Resolution
@@ -57,6 +57,7 @@ The following plot shows the number of walking steps required for each initial a
 I selected an initial condition from the lookup table that requires at least three walking steps to reach the region of attraction. At each Poincare crossing, the lookup table was used to select the angle of attack for the following step.
 
 Initial angular velocity: **2.243 rad/s**
+
 Lookup-table classification: **3 steps**
 
 ![Three-step trajectory](output/assignment_2/trajectory.png)
@@ -64,7 +65,7 @@ Lookup-table classification: **3 steps**
 
 ## 7. Maximum-Step Trajectory
 
-Using the same initial condition, I searched the angle-of-attack values for the first two steps to determine whether a different control sequence could keep the walker walking longer before reaching the RoA. The longest trajectory found was still classified as three steps, using \(\alpha=\pi/8\) for both of the first two steps.
+Using the same initial condition, I searched the angle-of-attack values for the first two steps to determine whether a different control sequence could keep the walker walking longer before reaching the RoA. The longest trajectory found was still classified as three steps, using $\alpha=\pi/8$ for both of the first two steps.
 
 Therefore, within this search, changing the angle-of-attack did not produce a longer trajectory than the original lookup-table trajectory.
 
