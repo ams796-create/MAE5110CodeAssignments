@@ -4,7 +4,7 @@
 
 [Briefly describe the inverted pendulum walker model and the control approach.]
 
-![Model and controller sketches](output/assignment_2/sketches.png)
+![Model and controller sketches](output/assignment_2/sketches.jpg)
 
 
 ## 2. Ankle Controller and Region of Attraction
