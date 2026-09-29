@@ -9,24 +9,76 @@ import numpy as np
 
 
 def generate_params():
-    pass
+    params = {
+    "gravity": 9.81,
+    "length": 1.0,
+    "mass": 1.0,
+    "incline": 0.06,
+    "angle_of_attack": np.pi / 8,
+    "ankle_torque": 0.0,
+    }
+
+    return params
 
 
 def dynamics(t, state, params):
     # TODO: implement the state derivative.
-    return np.array([0.0, 0.0])
+    gravity = params["gravity"]
+    length = params["length"]
+    mass = params["mass"]
+    ankle_torque = params["ankle_torque"]
+
+    angle = state[0]
+    angular_velocity = state[1]
+
+    angular_acceleration = ((gravity * np.sin(angle))/length + 
+        ankle_torque/(mass * length**2))
+
+    state_derivative = np.array([angular_velocity, angular_acceleration])
+    return state_derivative
 
 
 def event_guard(previous_state, next_state, params):
-    pass
+    incline = params["incline"]
+    angle_of_attack = params["angle_of_attack"]
+
+    previous_angle = previous_state[0]
+    next_angle = next_state[0]
+
+    impact_angle = incline + angle_of_attack
+
+    return next_angle >= impact_angle > previous_angle
 
 
 def event_dynamics(state, params):
-    pass
+    incline = params["incline"]
+    angle_of_attack = params["angle_of_attack"]
+
+    angular_velocity = state[1]
+
+    reset_impact_angle = incline - angle_of_attack
+
+    reset_angular_velocity = angular_velocity * np.cos(2 * angle_of_attack)
+
+    reset_state = [reset_impact_angle, reset_angular_velocity]
+
+    return reset_state
 
 
 def calculate_energy(state, params):
-    pass
+    gravity = params["gravity"]
+    length = params["length"]
+    mass = params["mass"]
+
+    angle = state[0]
+    angular_velocity = state[1]
+
+    kinetic_energy = 0.5 * mass * (length**2) * angular_velocity**2
+    potential_energy = mass * gravity * length * np.cos(angle)
+
+    total_energy = kinetic_energy + potential_energy
+
+    return total_energy
 
 
 def visualize(
