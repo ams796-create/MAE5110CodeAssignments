@@ -7,6 +7,9 @@ of those functions; it draws a supplied state without advancing the simulation.
 import matplotlib.pyplot as plt
 import numpy as np
 
+def generate_initial_condition():
+    return np.array([0.1, 0.0])
+
 
 def generate_params():
     params = {
